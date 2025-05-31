@@ -29,7 +29,7 @@ export class BilueStack extends cdk.Stack {
         "CreateIntegration",
         createCheckInLambda,
       );
-    checkInTable.grantWriteData(createCheckInLambda);
+    checkInTable.grantReadWriteData(createCheckInLambda);
     createCheckInLambda.addEnvironment(
       "CHECK_IN_TABLE_NAME",
       checkInTable.tableName,

@@ -31,19 +31,10 @@ export const handler = async (
       }),
     );
 
-    const users = (result.Items ?? []).map((item) => item.userId);
-
-    if (users.length === 0) {
-      return {
-        statusCode: 404,
-        body: JSON.stringify({
-          message: "No users found registered in the event",
-        }),
-      };
-    }
+    const users = (result.Items ?? []).map((item) => item.userId.S);
 
     return {
-      statusCode: 200,
+      statusCode: users.length === 0 ? 204 : 200,
       body: JSON.stringify({
         eventId,
         users,
